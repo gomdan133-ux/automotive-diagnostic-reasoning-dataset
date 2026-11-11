@@ -63,6 +63,16 @@ This checks every case against the schema and writes `data/cases.jsonl` (one cas
 
 Values such as specs and tolerances are typical figures for illustration. Always use the manufacturer's service information for a specific vehicle.
 
+## How this was built
+
+1. **Picked real repair patterns.** I chose 12 common comebacks and misdiagnoses I see as a dealership and independent shop technician, covering 8 vehicle systems.
+2. **Wrote each case the way a tech works it.** Each case goes customer complaint → codes and measurements → ordered test steps → confirmed root cause → fix.
+3. **Recorded the traps.** For every case, I listed the "parts-cannon" answer an AI or a new tech is likely to give, and explained why the evidence rules it out.
+4. **Defined a schema and validated it.** `scripts/validate_and_export.py` checks every case for required fields, unique IDs, at least 3 diagnostic steps and valid difficulty levels. It then exports `cases.jsonl`, one case per line, ready for training or evaluation pipelines.
+5. **Kept specs generic.** Values like thickness variation limits and voltage drop limits are typical shop figures. Real work should always follow OEM service information.
+
+Next step: add real cases from my own repair orders, with customer and VIN details removed, and include harder intermittent-fault cases.
+
 ## License
 
 MIT
